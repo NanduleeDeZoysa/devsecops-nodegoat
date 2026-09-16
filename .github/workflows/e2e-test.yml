@@ -4,7 +4,7 @@ on: [push, pull_request]
 jobs:
   e2e-test:
     container:
-      image: cypress/base:12
+        image: cypress/base:latest
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
