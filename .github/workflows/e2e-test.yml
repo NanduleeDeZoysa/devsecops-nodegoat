@@ -3,9 +3,9 @@ on: [push, pull_request]
 
 jobs:
   e2e-test:
-    name: Node.js
+    container:
+      image: cypress/base:12
     runs-on: ubuntu-latest
-
     strategy:
       fail-fast: false
       matrix:
