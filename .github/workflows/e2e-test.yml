@@ -37,8 +37,8 @@ jobs:
 
       - name: Install dependencies
         run: |
-          sudo apt-get update
-          sudo apt-get install -y libgconf-2-4 xvfb libxkbcommon-x11-0 libxkbcommon0 || true
+          apt-get update
+          apt-get install -y libgconf-2-4 xvfb libxkbcommon-x11-0 libxkbcommon0 || true
           npm ci
           npm run cy:verify
     
