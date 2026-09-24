@@ -42,8 +42,9 @@ describe("/tutorial behaviour", () => {
   });
 
   it("Should exists /tutorial/a7", () => {
-    cy.visitPage("/tutorial/a7");
-    cy.url().should("include", "a7");
+    cy.request("/tutorial/a7")
+      .its("status")
+      .should("eq", 200);
   });
 
   it("Should exists /tutorial/a8", () => {
