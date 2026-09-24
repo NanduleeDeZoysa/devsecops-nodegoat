@@ -1,3 +1,4 @@
+"use strict";
 const { defineConfig } = require("cypress");
 const { port, hostName } = require("./config/env/all");
 
