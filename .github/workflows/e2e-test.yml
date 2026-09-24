@@ -33,7 +33,9 @@ jobs:
             mongo:4.4
 
           timeout 60s bash -c \
-            'until nc -z -w 2 localhost 27017; do sleep 2; done'
+            'until docker exec nodegoat-mongo \
+            mongo --quiet --eval "db.adminCommand({ ping: 1 })" \
+            >/dev/null 2>&1; do sleep 2; done'
 
       - name: Run E2E test suite
         id: test-suite
@@ -56,3 +58,4 @@ jobs:
           name: cypress-videos
           path: test/e2e/videos
           if-no-files-found: ignore
+
