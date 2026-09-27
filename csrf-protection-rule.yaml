@@ -17,4 +17,25 @@ rules:
         - "https://github.com/expressjs/csurf"
     patterns:
       - pattern-regex: '/\*\s*\n\s*// Fix for A8 - CSRF[\s\S]*?app\.use\(csrf\(\)\);[\s\S]*?\*/' 
-      
+
+
+
+# CSRF (T4) — Evidence Log
+## Vulnerable code
+server.js lines 7, 104-113 — csurf middleware commented out.
+
+## Exploit
+POST /profile with a valid session cookie but no _csrf field
+succeeds (200 OK) and overwrites address/bank fields.
+
+## Semgrep before fix
+1 finding — nodegoat-csrf-protection-disabled
+
+## Fix
+Uncommented `require("csurf")` and `app.use(csrf())`.
+
+## Semgrep after fix
+0 findings
+
+## Re-test
+Same curl request now returns 403 Forbidden (invalid csrf token).
