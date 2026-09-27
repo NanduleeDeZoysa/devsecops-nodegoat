@@ -109,7 +109,7 @@ MongoClient.connect(db, (err, db) => {
         res.locals.csrftoken = req.csrfToken();
         next();
     });
-*//
+*/
     // Register templating engine
     app.engine(".html", consolidate.swig);
     app.set("view engine", "html");
