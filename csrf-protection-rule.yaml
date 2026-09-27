@@ -1,0 +1,41 @@
+rules:
+  - id: nodegoat-csrf-protection-disabled
+    languages: [generic]
+    severity: ERROR
+    message: >
+      CSRF middleware (csurf) is commented out instead of being registered as
+      active middleware. Every view already renders a hidden `_csrf` form field
+      expecting a token (see app/views/profile.html), but with this middleware
+      disabled the server never issues or verifies that token, so state-changing
+      POST routes such as /profile accept forged cross-site requests
+      (CWE-352 / OWASP A01:2021 - Broken Access Control).
+    metadata:
+      cwe: "CWE-352: Cross-Site Request Forgery (CSRF)"
+      owasp: "A01:2021 - Broken Access Control"
+      references:
+        - "https://owasp.org/www-community/attacks/csrf"
+        - "https://github.com/expressjs/csurf"
+    patterns:
+      - pattern-regex: '/\*\s*\n\s*// Fix for A8 - CSRF[\s\S]*?app\.use\(csrf\(\)\);[\s\S]*?\*/' 
+
+
+
+# CSRF (T4) — Evidence Log
+## Vulnerable code
+server.js lines 7, 104-113 — csurf middleware commented out.
+
+## Exploit
+POST /profile with a valid session cookie but no _csrf field
+succeeds (200 OK) and overwrites address/bank fields.
+
+## Semgrep before fix
+1 finding — nodegoat-csrf-protection-disabled
+
+## Fix
+Uncommented `require("csurf")` and `app.use(csrf())`.
+
+## Semgrep after fix
+0 findings
+
+## Re-test
+Same curl request now returns 403 Forbidden (invalid csrf token).
