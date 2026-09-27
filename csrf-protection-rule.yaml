@@ -12,6 +12,9 @@ rules:
     metadata:
       cwe: "CWE-352: Cross-Site Request Forgery (CSRF)"
       owasp: "A01:2021 - Broken Access Control"
+      references:
+        - "https://owasp.org/www-community/attacks/csrf"
+        - "https://github.com/expressjs/csurf"
     patterns:
       - pattern-regex: '/\*\s*\n\s*// Fix for A8 - CSRF[\s\S]*?app\.use\(csrf\(\)\);[\s\S]*?\*/' 
       
