@@ -1,0 +1,12 @@
+rules:
+  - id: nodegoat-swig-autoescape-disabled
+    message: "Swig autoescaping is disabled, which can allow stored XSS when user-controlled data is rendered in HTML."
+    severity: ERROR
+    languages:
+      - javascript
+    pattern: |
+      swig.setDefaults({
+        ...,
+        autoescape: false,
+        ...
+      })
