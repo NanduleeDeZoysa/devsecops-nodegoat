@@ -1,0 +1,12 @@
+﻿rules:
+  - id: nodegoat-idor-userid-from-request-params
+    languages: [javascript]
+    severity: ERROR
+    message: >
+      userId is taken from a client-controlled request parameter instead of
+      req.session.userId (IDOR / Broken Access Control).
+    metadata:
+      cwe: "CWE-639"
+      owasp: "A01:2021 - Broken Access Control"
+    pattern: |
+      const { userId } = req.params;
