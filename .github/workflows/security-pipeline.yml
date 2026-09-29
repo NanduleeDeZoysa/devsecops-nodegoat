@@ -24,3 +24,6 @@ jobs:
         uses: semgrep/semgrep-action@v1
         with:
           config: p/javascript
+
+      - name: Run npm audit
+        run: npm audit --audit-level=high
