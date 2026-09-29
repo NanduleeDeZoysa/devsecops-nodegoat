@@ -1,0 +1,29 @@
+name: Container Scan
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  trivy-image-scan:
+    name: Docker build + Trivy image scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: docker build -t nodegoat-security-scan .
+
+      - name: Trivy image scan (fails on CRITICAL/HIGH)
+        uses: aquasecurity/trivy-action@v0.36.0
+        with:
+          image-ref: nodegoat-security-scan
+          format: table
+          exit-code: '1'
+          ignore-unfixed: true
+          severity: CRITICAL,HIGH
+          scanners: vuln,secret
