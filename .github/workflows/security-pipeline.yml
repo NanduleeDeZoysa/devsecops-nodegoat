@@ -19,3 +19,8 @@ jobs:
 
       - name: Pipeline started
         run: echo "Security pipeline started successfully"
+
+      - name: Run Semgrep SAST
+        uses: semgrep/semgrep-action@v1
+        with:
+          config: p/javascript
