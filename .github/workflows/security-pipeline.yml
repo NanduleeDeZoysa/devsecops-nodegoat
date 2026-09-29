@@ -26,4 +26,8 @@ jobs:
           config: p/javascript
 
       - name: Run npm audit
+	continue-on-error: true
+	run: npm audit --audit-level=high
+
+      - name: Run npm audit
         run: npm audit --audit-level=high
