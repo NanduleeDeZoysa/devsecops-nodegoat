@@ -6,7 +6,7 @@ const bodyParser = require("body-parser");
 const session = require("express-session");
 const csrf = require("csurf");
 const consolidate = require("consolidate"); // Templating library adapter for Express
-const nunjucks = require("nunjucks");
+const swig = require("swig");
 // const helmet = require("helmet");
 const MongoClient = require("mongodb").MongoClient; // Driver for connecting to MongoDB
 const http = require("http");
@@ -111,8 +111,7 @@ MongoClient.connect(db, (err, db) => {
     });
 
     // Register templating engine
-    nunjucks.configure(`${__dirname}/app/views`, { autoescape: true });
-    app.engine(".html", consolidate.nunjucks);
+    app.engine(".html", consolidate.swig);
     app.set("view engine", "html");
     app.set("views", `${__dirname}/app/views`);
     // Fix for A5 - Security MisConfig
@@ -129,6 +128,12 @@ MongoClient.connect(db, (err, db) => {
 
     // Application routes
     routes(app, db);
+
+    // Update server.js
+    swig.setDefaults({
+    // Enable autoescaping to prevent XSS
+    autoescape: true
+    });
 
     // Insecure HTTP connection
     http.createServer(app).listen(port, () => {

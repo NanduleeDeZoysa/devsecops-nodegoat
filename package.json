@@ -6,22 +6,21 @@
   "main": "server.js",
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
-    "body-parser": "^1.20.3",
+    "body-parser": "^1.15.1",
     "consolidate": "^0.14.1",
     "csurf": "^1.8.3",
     "dont-sniff-mimetype": "^1.0.0",
-    "express": "^4.21.2",
+    "express": "^4.13.4",
     "express-session": "^1.13.0",
-    "marked": "^4.0.10",
-    "mongodb": "^3.1.13",
+    "forever": "^2.0.0",
+    "helmet": "^2.0.0",
+    "marked": "0.3.5",
+    "mongodb": "^2.1.18",
     "needle": "2.2.4",
     "node-esapi": "0.0.1",
     "serve-favicon": "^2.3.0",
-    "nunjucks": "^3.2.4",
-    "underscore": "^1.13.8"
-  },
-  "overrides": {
-    "path-to-regexp": "0.1.13"
+    "swig": "^1.4.2",
+    "underscore": "^1.8.3"
   },
   "comments": {
     "//": "a9 insecure components"
