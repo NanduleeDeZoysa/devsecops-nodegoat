@@ -2,7 +2,7 @@ services:
   web:
     build: .
     environment:
-      NODE_ENV:
+      NODE_ENV: production
       MONGODB_URI: mongodb://mongo:27017/nodegoat
     command: sh -c "until nc -z -w 2 mongo 27017 && echo 'mongo is ready for connections' && node artifacts/db-reset.js && node server.js; do sleep 2; done"
     ports:
