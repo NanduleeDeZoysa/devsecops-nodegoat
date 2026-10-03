@@ -8,7 +8,7 @@ OWASP Top 10 for Node.js web applications:
 
 ### Know it!
 
-This application bundled a tutorial page that explains the OWASP Top 10 vulnerabilities and how to fix them.
+This application bundled a tutorial page that explains the OWASP Top 10 vulnerabilities and how to fix.
 
 Once the application is running, you can access the tutorial page at [http://localhost:4000/tutorial](http://localhost:4000/tutorial) (or the port you have configured).
 
